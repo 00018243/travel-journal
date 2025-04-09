@@ -1,0 +1,18 @@
+extends ../layout.pug
+
+block content
+  h2 My Trips
+  if trips.length
+    ul
+      each trip in trips
+        li
+          strong #{trip.title} (#{trip.location}, #{trip.date})
+          p #{trip.experiences || 'No experiences added'}
+          a(href=`/trips/edit/${trip.id}`) Edit
+          form(action=`/trips/delete/${trip.id}`, method='POST', style='display:inline')
+            button(type='submit') Delete
+  else
+    p No trips yet. Add one below!
+  a(href='/trips/create') Add a New Trip
+  br
+  a(href='/') Back to Home
